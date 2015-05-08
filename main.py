@@ -1,5 +1,5 @@
 # Term Project
-# Anirudh Ramakrishnan, Section D, anirudhr
+# Anirudh Ramakrishnan
 # Some ideas were made possible thanks to Yousof Soliman and Yeongwoo Hwang
 ###############################################
 
