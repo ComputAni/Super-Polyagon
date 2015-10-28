@@ -6,6 +6,8 @@
 from __future__ import with_statement # for Python 2.5 and 2.6
 from Tkinter import *
 from eventBasedAnimationClass import EventBasedAnimationClass
+from InvinciblePieceClass import InvinciblePiece
+from PauseScreenClass import PauseScreen
 import random,copy,time
 import contextlib # for urllib.urlopen()
 import urllib
@@ -660,43 +662,6 @@ class SuperHex(EventBasedAnimationClass):
             self.initializeTimers()
         elif self.isGameOver and not self.isPaused:
             self.drawGameOverScreen()
-
-#for the invincible token that occasionally appears
-class InvinciblePiece(object):
-    def __init__(self,width,height):
-        self.pieceAngle = random.choice([math.pi/2,math.pi,3*math.pi/2,2*math.pi])
-        self.width = width
-        self.height = height
-        self.radius = 80
-        self.pieceTimer = 40
-        self.invincibilityTimer = 40
-
-    def draw(self,canvas):
-        (cx,cy,r) = self.width/2,self.height/2,self.radius
-        (cos,sin,angle,d) = (math.cos,math.sin,self.pieceAngle,dict())
-        centerX,centerY = cx + r*cos(angle), cx - r*sin(angle)
-        d["coordinates"] = (centerX - 15,centerY - 15,centerX + 15,centerY + 15)
-        canvas.create_oval(d["coordinates"],fill = "red")
-
-    def checkPieceCollision(self):
-        pass
-
-#pause screen object
-class PauseScreen(object):
-    def __init__(self,width,height):
-        self.width = width
-        self.height = height
-
-    def draw(self,splashInst,canvas,score):
-        SplashScreen.drawMainHexagon(splashInst,canvas,"white")        
-        canvas.create_text(self.width/2,self.height/2 - 250, 
-                text = "Game paused", font = "Aeiral 30 bold underline")
-        canvas.create_text(self.width/2,self.height/2 -175, 
-            text = "Current Score: " + str(score), font = "Aerial 20 bold")
-        canvas.create_text(self.width/2,self.height/2 -100, 
-            text = "Press p to un-pause", font = "Aerial 20 bold")
-        canvas.create_text(self.width/2,self.height/2 - 25, 
-            text = "Press r to restart", font = "Aerial 20 bold")
 
 #Game over screen
 class GameOver(object):
